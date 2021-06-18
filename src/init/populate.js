@@ -2,7 +2,7 @@ const axios = require('axios');
 const { propertyService } = require('../services');
 
 const fetchProperties = async (day) => {
-  const properties = await axios({
+  const { data } = await axios({
     method: 'get',
     url: 'https://test-leadev.osc-fr1.scalingo.io/citimaImmo',
     headers: {
@@ -12,8 +12,8 @@ const fetchProperties = async (day) => {
       day,
     },
   });
-  properties.forEach((property) => {
-    propertyService.createProperty(property);
+  data.forEach((property) => {
+    propertyService.updateProperty(property);
   });
 };
 

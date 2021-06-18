@@ -2,12 +2,16 @@ const mongoose = require('mongoose');
 const app = require('./app');
 const config = require('./config/config');
 const logger = require('./config/logger');
+const { fetchProperties } = require('./init/populate');
 
 let server;
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   logger.info('Connected to MongoDB');
   server = app.listen(config.port, () => {
     logger.info(`Listening to port ${config.port}`);
+    fetchProperties(1).then(() => {
+      logger.info(`Properties of day 1 fetched`);
+    });
   });
 });
 

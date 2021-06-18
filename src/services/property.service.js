@@ -6,6 +6,10 @@ const createProperty = async (propertyBody) => {
   return Property.create(propertyBody);
 };
 
+const updateProperty = async (propertyBody) => {
+  return Property.updateOne(propertyBody, { upsert: true });
+};
+
 const queryProperties = async (filter, options) => {
   return Property.paginate(filter, options);
 };
@@ -40,6 +44,7 @@ const deletePropertyById = async (propertyId) => {
 
 module.exports = {
   createProperty,
+  updateProperty,
   queryProperties,
   getPropertyById,
   updatePropertyById,
